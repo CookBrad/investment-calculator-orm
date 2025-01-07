@@ -1,11 +1,14 @@
 {
   "scripts": {
-    "migrate:check": "db-migrate check"
+    "migrate:check": "db-migrate check",
+    "migrate:up": "db-migrate up",
+    "migrate:down": "db-migrate down"
   },
   "dependencies": {
     "sequelize": "^6.37.5"
   },
   "devDependencies": {
-    "db-migrate": "^0.11.14"
+    "db-migrate": "^0.11.14",
+    "db-migrate-pg": "^1.5.2"
   }
 }
