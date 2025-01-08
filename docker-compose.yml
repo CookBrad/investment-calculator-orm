@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: timescale/timescaledb:latest-pg14
+    container_name: timescaledb
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - timescaledb-data:/home/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  timescaledb-data:
+    driver: local

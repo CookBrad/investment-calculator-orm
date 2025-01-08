@@ -2,7 +2,10 @@
   "scripts": {
     "migrate:check": "db-migrate check",
     "migrate:up": "db-migrate up",
-    "migrate:down": "db-migrate down"
+    "migrate:down": "db-migrate down",
+    "docker:up": " docker compose up -d",
+    "docker:up:rebuild": " docker compose up --build -d",
+    "docker:down": " docker compose down"
   },
   "dependencies": {
     "sequelize": "^6.37.5"
