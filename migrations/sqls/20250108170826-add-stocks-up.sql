@@ -11,6 +11,7 @@ CREATE TABLE user_stocks (
     id SERIAL PRIMARY KEY,
     user_id INTEGER,
     stock_id INTEGER,
+    quantity INTEGER,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP DEFAULT NULL,
@@ -18,42 +19,18 @@ CREATE TABLE user_stocks (
     FOREIGN KEY (stock_id) REFERENCES stocks(id) ON DELETE CASCADE
 );
 
-CREATE TABLE stock_value_history (
-    id SERIAL PRIMARY KEY,
-    user_stock_id INTEGER,
-    record_date TIMESTAMP,
-    stock_value DECIMAL(15, 2),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP DEFAULT NULL,
-    FOREIGN KEY (user_stock_id) REFERENCES user_stocks(id) ON DELETE CASCADE
-);
-
-CREATE TABLE user_stock_quantity_history (
-    id SERIAL PRIMARY KEY,
-    user_stock_id INTEGER,
-    record_date TIMESTAMP,
-    quantity INTEGER,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP DEFAULT NULL,
-    FOREIGN KEY (user_stock_id) REFERENCES user_stocks(id) ON DELETE CASCADE
-);
-
-CREATE TABLE stock_price_history (
+CREATE TABLE stock_price_histories (
     id SERIAL PRIMARY KEY,
     stock_id INTEGER,
-    record_date TIMESTAMP,
     open_price DECIMAL(15, 2),
     high_price DECIMAL(15, 2),
     low_price DECIMAL(15, 2),
-    close_price DECIMAL(15, 2),
+    previous_close_price DECIMAL(15, 2),
     volume BIGINT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP DEFAULT NULL,
-    FOREIGN KEY (stock_id) REFERENCES stocks(id) ON DELETE CASCADE,
-    UNIQUE (stock_id, record_date)
+    FOREIGN KEY (stock_id) REFERENCES stocks(id) ON DELETE CASCADE
 );
 
 CREATE TABLE stock_transactions (
