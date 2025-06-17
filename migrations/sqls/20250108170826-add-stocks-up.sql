@@ -1,7 +1,7 @@
 CREATE TABLE stocks (
     id SERIAL PRIMARY KEY,
-    stock_symbol VARCHAR(10) UNIQUE NOT NULL,
-    stock_name VARCHAR(100) NOT NULL,
+    symbol VARCHAR(10) UNIQUE NOT NULL,
+    name VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP NULL
@@ -19,13 +19,13 @@ CREATE TABLE user_stocks (
     FOREIGN KEY (stock_id) REFERENCES stocks(id) ON DELETE CASCADE
 );
 
-CREATE TABLE stock_price_histories (
+CREATE TABLE stock_prices (
     id SERIAL PRIMARY KEY,
     stock_id INTEGER,
-    open_price DECIMAL(15, 2),
-    high_price DECIMAL(15, 2),
-    low_price DECIMAL(15, 2),
-    previous_close_price DECIMAL(15, 2),
+    open DECIMAL(15, 2),
+    high DECIMAL(15, 2),
+    low DECIMAL(15, 2),
+    previous_close DECIMAL(15, 2),
     volume BIGINT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -33,10 +33,10 @@ CREATE TABLE stock_price_histories (
     FOREIGN KEY (stock_id) REFERENCES stocks(id) ON DELETE CASCADE
 );
 
-CREATE TABLE stock_transactions (
+CREATE TABLE user_stock_transactions (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER,
-    stock_id INTEGER,
+    user_id INTEGER NOT NULL,
+    stock_id INTEGER NOT NULL,
     transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     transaction_type VARCHAR(10) CHECK (transaction_type IN ('buy', 'sell')),
     quantity INTEGER NOT NULL,
