@@ -13,10 +13,14 @@ module.exports = (sequelize, DataTypes) => {
             volume: DataTypes.INTEGER,
             previousClose: DataTypes.DECIMAL(15, 2),
 
+        },
+        {
+            tableName: 'stock_prices',
+
         }
     );
-    StockPrice.associate = (models) => {
-        this.Stock = StockPrice.belongsTo(models.Stock, {
+    StockPrice.associate = function associate(models) {
+        this.Stock = this.belongsTo(models.Stock, {
             foreignKey: 'stockId',
 
         });

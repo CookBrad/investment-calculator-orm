@@ -30,13 +30,16 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.DECIMAL(15, 2),
                 allowNull: false
             }
+        },
+        {
+            tableName: 'user_stock_transactions'
         }
     );
-    UserStockTransaction.associate = (models) => {
+    UserStockTransaction.associate = function associate(models) {
         this.User = this.belongsTo(models.User, {
             foreignKey: 'userId'
         });
-        this.Stock = UserStockTransaction.belongsTo(models.Stock, {
+        this.Stock = this.belongsTo(models.Stock, {
             foreignKey: 'stockId'
         });
     };

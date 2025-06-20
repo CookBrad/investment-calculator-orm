@@ -5,13 +5,17 @@ module.exports = (sequelize, DataTypes) => {
             userId: DataTypes.INTEGER,
             stockId: DataTypes.INTEGER,
             quantity: DataTypes.INTEGER
+        },
+        {
+            tableName: 'user_stocks',
+
         }
     );
-    UserStock.associate = (models) => {
-        this.User = UserStock.belongsTo(models.User, {
+    UserStock.associate = function associate(models) {
+        this.User = this.belongsTo(models.User, {
             foreignKey: 'userId'
         });
-        this.Stock = UserStock.belongsTo(models.Stock, {
+        this.Stock = this.belongsTo(models.Stock, {
             foreignKey: 'stockId'
         });
     };

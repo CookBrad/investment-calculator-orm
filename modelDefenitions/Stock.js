@@ -4,9 +4,13 @@ module.exports = (sequelize, DataTypes) => {
         {
             symbol: DataTypes.STRING,
             name: DataTypes.STRING,
+        },
+        {
+            tableName: 'stocks',
+
         }
     );
-    Stock.associate = (models) => {
+    Stock.associate = function associate(models) {
         this.Userstocks = this.hasMany(models.UserStock, {
             foreignKey: 'stockId',
         });
